@@ -8,12 +8,14 @@ require 'base64'
 require 'nokogiri'
 require 'json'
 require 'fileutils'
+require 'set'
 
 # --- Configuration ---
-VERSION = "1.0.#{Time.now.strftime("%Y%m%d%H%M%S")}"
+VERSION = "1.1.#{Time.now.strftime("%Y%m%d%H%M%S")}"
 INPUT_FILES = Dir.glob(File.join(File.dirname(__FILE__), '*.md'))
 OUTPUT_FILE = 'bookmarks.html'
 FAVICON_CACHE_FILE = 'favicon_cache.json'
+KNOWN_URLS_FILE = 'known_urls.json'
 
 CSS_CONTENT = <<~CSS
 /* Base styles */
@@ -192,85 +194,43 @@ def get_and_process_favicon(page_url)
       if response.is_a?(Net::HTTPSuccess)
         doc = Nokogiri::HTML(response.body)
         
-        # Collect all potential favicons
         icons = doc.css("link[rel*='icon']")
-        
-        # Sort icons to prioritize smallest and 'image/x-icon'
-        # The logic here is:
-        # 1. Prefer 'image/x-icon' (ICO)
-        # 2. Then by sizes, preferring smaller sizes
-        # 3. Then by type, preferring PNG over others
         sorted_icons = icons.sort_by do |icon|
-          rel = icon['rel'] || ''
           type = icon['type'] || ''
           sizes_attr = icon['sizes']
-          
-          size_value = 9999 # Default large size for sorting
-          if sizes_attr && sizes_attr =~ /(\d+)x(\d+)/
-            size_value = $1.to_i
-          end
-          
-          # Priority: ICO > PNG > SVG > Others
-          type_priority = case type
-                          when 'image/x-icon' then 0
-                          when 'image/png' then 1
-                          when 'image/svg+xml' then 2
-                          else 3
-                          end
-          
-          # Priority: 'shortcut icon' > 'icon' (less important than type/size)
-          rel_priority = rel.include?('shortcut icon') ? 0 : 1
-          
-          [type_priority, size_value, rel_priority]
+          size_value = sizes_attr && sizes_attr =~ /(\d+)x(\d+)/ ? $1.to_i : 9999
+          type_priority = ['image/x-icon', 'image/png', 'image/svg+xml'].index(type) || 3
+          [type_priority, size_value]
         end
 
-        sorted_icons.each do |icon_link|
-          href = icon_link['href']
+        if best_icon = sorted_icons.first
+          href = best_icon['href']
           if href
             candidate_uri = URI.join(page_uri, href)
-            # Ensure it's an http/https URL
-            if ['http', 'https'].include?(candidate_uri.scheme)
-              best_favicon_url = candidate_uri.to_s
-              break # Found the best candidate, stop looking
-            end
+            best_favicon_url = candidate_uri.to_s if ['http', 'https'].include?(candidate_uri.scheme)
           end
         end
       end
     end
-  rescue StandardError => e
-    # puts "Error fetching page for favicon discovery for #{page_url}: #{e.message}"
-  end
+  rescue StandardError; end
 
-  # Fallback to /favicon.ico if no specific link was found
-  unless best_favicon_url
-    fallback_favicon_url = URI.join(page_uri, '/favicon.ico').to_s
-    best_favicon_url = fallback_favicon_url
-  end
+  # Fallback to /favicon.ico
+  best_favicon_url ||= URI.join(page_uri, '/favicon.ico').to_s
 
-  # Step 2: Fetch the favicon image data
+  # Step 2: Fetch and process the favicon
   begin
-    # Use the determined best_favicon_url
     image_data = URI.open(best_favicon_url, 'rb', read_timeout: 3, open_timeout: 3).read
+    return nil if image_data.bytesize > MAX_FAVICON_SIZE_BYTES
     
-    # Check size limit
-    if image_data.bytesize > MAX_FAVICON_SIZE_BYTES
-      # puts "Favicon for #{page_url} exceeds size limit (#{image_data.bytesize} bytes), skipping."
-      return nil # Too large, return nil so it's marked as 'failed'
-    end
-
     ext = File.extname(URI.parse(best_favicon_url).path).delete('.').downcase
-    mime_type = case ext
-                when 'png' then 'image/png'; when 'jpg', 'jpeg' then 'image/jpeg'
-                when 'gif' then 'image/gif'; when 'svg' then 'image/svg+xml'
-                when 'ico' then 'image/x-icon'; else 'application/octet-stream'
-                end
+    mime_type = {
+      'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+      'gif' => 'image/gif', 'svg' => 'image/svg+xml', 'ico' => 'image/x-icon'
+    }[ext] || 'application/octet-stream'
+    
     return "data:#{mime_type};base64,#{Base64.strict_encode64(image_data)}"
-  rescue OpenURI::HTTPError => e
-    # puts "HTTP Error fetching favicon from #{best_favicon_url} for #{page_url}: #{e.message}"
-  rescue StandardError => e
-    # puts "Error fetching or processing favicon from #{best_favicon_url} for #{page_url}: #{e.message}"
-  end
-  nil # Return nil if anything failed
+  rescue StandardError; end
+  nil
 end
 
 def load_favicon_cache
@@ -281,24 +241,40 @@ def save_favicon_cache(cache)
   File.write(FAVICON_CACHE_FILE, JSON.pretty_generate(cache))
 end
 
-def generate_html(files)
+def load_known_urls
+    File.exist?(KNOWN_URLS_FILE) ? Set.new(JSON.parse(File.read(KNOWN_URLS_FILE))) : Set.new
+end
+
+def save_known_urls(urls)
+    File.write(KNOWN_URLS_FILE, JSON.pretty_generate(urls.to_a))
+end
+
+def generate_html_if_new(files)
   puts "Bookmarks Generator (v#{VERSION})"
+  
+  # First, check for new URLs
+  all_bookmarks = files.flat_map { |md_file| parse_bookmarks_tsv(File.read(md_file, encoding: 'UTF-8')) }
+  current_urls = Set.new(all_bookmarks.map { |bm| bm[:url] })
+  known_urls = load_known_urls
+  
+  new_urls_found = (current_urls != known_urls)
+
+  unless new_urls_found
+    puts "No new bookmark URLs found. Exiting."
+    return false
+  end
+
+  puts "New URLs detected. Proceeding with regeneration..."
   favicon_cache = load_favicon_cache
   puts "Loaded #{favicon_cache.size} favicons from cache."
   
-  all_bookmarks = []
-  files.each { |md_file| all_bookmarks.concat(parse_bookmarks_tsv(File.read(md_file, encoding: 'UTF-8')))}
   total_bookmarks = all_bookmarks.size
   puts "Found #{total_bookmarks} bookmarks to process."
 
-  # Collect all unique URLs that need favicons
-  unique_urls = all_bookmarks.map { |bm| bm[:url] }.uniq
-  
-  # Filter out URLs already in cache
-  urls_to_fetch = unique_urls.reject { |url| favicon_cache.key?(url) }
+  # Identify only the URLs that need their favicons fetched
+  urls_to_fetch = current_urls.reject { |url| favicon_cache.key?(url) }
   puts "Fetching favicons for #{urls_to_fetch.size} new URLs..."
 
-  # Fetch favicons for new URLs
   urls_to_fetch.each_with_index do |url, index|
     print "\rFetching favicon for URL #{index + 1}/#{urls_to_fetch.size}..."
     favicon_cache[url] = get_and_process_favicon(url) || 'failed'
@@ -306,16 +282,8 @@ def generate_html(files)
   puts "\nFinished fetching new favicons."
 
   File.open(OUTPUT_FILE, 'w') do |file|
-    file.puts "<!DOCTYPE html>"
-    file.puts "<html lang='en'>"
-    file.puts "  <head>"
-    file.puts "    <meta charset='UTF-8'>"
-    file.puts "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-    file.puts "    <title>Bookmarks (v#{VERSION})</title>"
-    file.puts "    <style>#{CSS_CONTENT}</style>"
-    file.puts "  </head>"
-    file.puts "  <body>"
-    file.puts "    <div class='masonry-container'>"
+    file.puts "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+    file.puts "<title>Bookmarks (v#{VERSION})</title><style>#{CSS_CONTENT}</style></head><body><div class='masonry-container'>"
 
     sorted_files = files.sort_by do |file_path|
       category = File.basename(file_path, '.md')
@@ -328,37 +296,66 @@ def generate_html(files)
       bookmarks = parse_bookmarks_tsv(File.read(md_file, encoding: 'UTF-8'))
 
       unless bookmarks.empty?
-        file.puts "      <div class='category'>"
-        file.puts "        <h2>#{category.gsub('"', '&quot;')}</h2>"
-        file.puts "        <ul>"
+        file.puts "<div class='category'><h2>#{category.gsub('"', '&quot;')}</h2><ul>"
         bookmarks.each do |bookmark|
           url = bookmark[:url]
           title = bookmark[:title]
-          
-          # Use the pre-fetched favicon data from the cache
           favicon_data = favicon_cache[url]
-          file.puts "          <li>"
-          if favicon_data && favicon_data != 'failed'
-            file.puts "            <img data-src='#{favicon_data}' class='favicon' alt=''>"
-          end
-          file.puts "            <a href='#{url}' title='#{url}'>#{title}</a>"
-          file.puts "          </li>"
+          file.puts "<li>"
+          file.puts "<img data-src='#{favicon_data}' class='favicon' alt=''>" if favicon_data && favicon_data != 'failed'
+          file.puts "<a href='#{url}' title='#{url}'>#{title}</a></li>"
         end
-        file.puts "        </ul>"
-        file.puts "      </div>"
+        file.puts "</ul></div>"
       end
     end
 
-    file.puts "    </div>"
-    file.puts "    <script>#{JS_CONTENT}</script>"
-    file.puts "  </body>"
-    file.puts "</html>"
+    file.puts "</div><script>#{JS_CONTENT}</script></body></html>"
   end
   
   puts "\nFinished processing."
   save_favicon_cache(favicon_cache)
-  puts "Successfully generated #{OUTPUT_FILE}"
+  save_known_urls(current_urls)
+  puts "Successfully generated #{OUTPUT_FILE} and updated URL cache."
+  return true
+end
+
+# --- Git Automation ---
+def git_add_commit_push
+  puts "\n--- Starting Git Automation ---"
+
+  # 1. Add all changes
+  puts "Staging changes..."
+  `git add .`
+  unless $?.success?
+    puts "Error: 'git add .' failed. Aborting push."
+    return
+  end
+
+  # 2. Commit with a timestamp if there are changes
+  status_output = `git status --porcelain`
+  if status_output.empty?
+    puts "No new changes to commit."
+  else
+    commit_message = "bookmarks regenerated on #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
+    puts "Committing with message: '#{commit_message}'"
+    `git commit -m "#{commit_message}"`
+    if !$?.success?
+      puts "Warning: 'git commit' failed. This might be because there are no new changes to commit."
+    end
+  end
+
+  # 3. Push to the remote repository
+  puts "Pushing to remote..."
+  `git push`
+  unless $?.success?
+    puts "Error: 'git push' failed. Please check your remote configuration and credentials."
+    return
+  end
+
+  puts "--- Git Automation Finished ---"
 end
 
 # --- Main Execution ---
-generate_html(INPUT_FILES)
+if generate_html_if_new(INPUT_FILES)
+  git_add_commit_push
+end
