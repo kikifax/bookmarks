@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmarks</title>
+  <style>
+    :root { --accent-color: #007bff; --text-color: #343a40; --bg-color: #f8f9fa; --card-bg: #ffffff; --card-border: #dee2e6; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.5; color: var(--text-color); background-color: var(--bg-color); margin: 0; padding: 2rem; -webkit-font-smoothing: antialiased; }
+    .main-container { max-width: 1600px; margin: 0 auto; }
+    h1 { color: var(--text-color); text-align: center; font-weight: 300; margin-bottom: 2rem; }
+    .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: 1.5rem; }
+    .category { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.04); min-width: 0; }
+    h2 { font-size: 1.2rem; font-weight: 500; color: var(--accent-color); margin-top: 0; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { margin-bottom: 0.5rem; }
+    a { color: var(--text-color); text-decoration: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s ease-in-out; }
+    a:hover { color: var(--accent-color); }
+    @media (max-width: 1200px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <h1>My Bookmarks</h1>
+    <div class="grid-container">
+      <div class='category'>
+        <h2>Tools</h2>
+        <ul>
+          <li><a href='https://instacalc.com/56090' target='_blank' title='https://instacalc.com/56090'>Neinstedter | InstaCalc Online Calculator</a></li>
+          <li><a href='https://raindrop.io/dresalii-raindrop-io/links-28915621' target='_blank' title='https://raindrop.io/dresalii-raindrop-io/links-28915621'>Links</a></li>
+          <li><a href='https://www.speedtest.net/' target='_blank' title='https://www.speedtest.net/'>Speedtest by Ookla - The Global Broadband Speed Test</a></li>
+          <li><a href='https://pixlr.com/e/' target='_blank' title='https://pixlr.com/e/'>Photo Editor : Pixlr E - free image editing tool</a></li>
+          <li><a href='https://www.onworks.net/#' target='_blank' title='https://www.onworks.net/#'>Free Cloud Hosting by OnWorks</a></li>
+          <li><a href='https://www.clever-tanken.de/tankstelle_liste?spritsorte=7&r=5&lat=51.7527606&lon=11.037722&ort=06502+Thale' target='_blank' title='https://www.clever-tanken.de/tankstelle_liste?spritsorte=7&r=5&lat=51.7527606&lon=11.037722&ort=06502+Thale'>Die gnstigsten Diesel, Sprit, Benzinpreise, Tankstellen in Ihrer Stadt</a></li>
+          <li><a href='https://tb.rg-adguard.net/faq.php?lang=en-US' target='_blank' title='https://tb.rg-adguard.net/faq.php?lang=en-US'>FAQ - TechBench by WZT (v4.1.1)</a></li>
+          <li><a href='https://github.com/LibreTranslate/LibreTranslate' target='_blank' title='https://github.com/LibreTranslate/LibreTranslate'>LibreTranslate/LibreTranslate: Free and Open Source Machine Translation API. 100% self-hosted, offline capable and easy to setup.</a></li>
+          <li><a href='https://www.charactercountonline.com/' target='_blank' title='https://www.charactercountonline.com/'>Online Character Count Tool</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Ai</h2>
+        <ul>
+          <li><a href='https://chat.openai.com/' target='_blank' title='https://chat.openai.com/'>ChatGPT</a></li>
+          <li><a href='https://gemini.google.com/app' target='_blank' title='https://gemini.google.com/app'>Gemini</a></li>
+          <li><a href='https://www.phind.com/' target='_blank' title='https://www.phind.com/'>Phind: AI search engine</a></li>
+          <li><a href='https://www.perplexity.ai/' target='_blank' title='https://www.perplexity.ai/'>Perplexity</a></li>
+          <li><a href='https://chat.deepseek.com/' target='_blank' title='https://chat.deepseek.com/'>DeepSeek - Into the Unknown</a></li>
+          <li><a href='https://copilot.microsoft.com/' target='_blank' title='https://copilot.microsoft.com/'>Copilot</a></li>
+          <li><a href='https://andisearch.com/' target='_blank' title='https://andisearch.com/'>Andi - Search for the next generation</a></li>
+          <li><a href='https://you.com/search?q=&tbm=youchat&cfr=chat' target='_blank' title='https://you.com/search?q=&tbm=youchat&cfr=chat'>- AI Search Based Chat | AI for Search Engines</a></li>
+          <li><a href='https://you.com/search?q=who+are+you&tbm=youchat' target='_blank' title='https://you.com/search?q=who+are+you&tbm=youchat'>who are you - You.com | The AI Search Engine You Control</a></li>
+          <li><a href='https://playgroundai.com/' target='_blank' title='https://playgroundai.com/'>Playground AI</a></li>
+          <li><a href='https://deepai.org/machine-learning-model/text2img' target='_blank' title='https://deepai.org/machine-learning-model/text2img'>Text To Image - AI Image Generator API | DeepAI</a></li>
+          <li><a href='https://www.artguru.ai/' target='_blank' title='https://www.artguru.ai/'>Free Online AI Art Generator - Create AI Art from Text & Photo | Artguru</a></li>
+          <li><a href='https://notegpt.io/youtube-video-summarizer' target='_blank' title='https://notegpt.io/youtube-video-summarizer'>NoteGPT - YouTube Video Summarizer with AI</a></li>
+          <li><a href='https://www.skimming.ai/' target='_blank' title='https://www.skimming.ai/'>Chat with Documents | Free Content Summarizer | Skimming AI</a></li>
+          <li><a href='https://notegpt.io/' target='_blank' title='https://notegpt.io/'>NoteGPT - AI Summarizer and Generator for Enhanced Learning</a></li>
+          <li><a href='https://sidekick.tobit.com/#/new' target='_blank' title='https://sidekick.tobit.com/#/new'>Sidekick | Sidekick</a></li>
+          <li><a href='https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1' target='_blank' title='https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1'>AI Chat</a></li>
+          <li><a href='https://lmarena.ai/' target='_blank' title='https://lmarena.ai/'>Chatbot Arena (formerly LMSYS): Free AI Chat to Compare & Test Best AI Chatbots</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Coding</h2>
+        <ul>
+          <li><a href='https://www.codingame.com/multiplayer/clashofcode' target='_blank' title='https://www.codingame.com/multiplayer/clashofcode'>Practice your coding skills on short coding contests - Clash of Code</a></li>
+          <li><a href='https://leetcode.com/problemset/' target='_blank' title='https://leetcode.com/problemset/'>Problems - LeetCode</a></li>
+          <li><a href='https://codingame.tools/' target='_blank' title='https://codingame.tools/'>CodinGame Clash search</a></li>
+          <li><a href='https://www.codingame.com/multiplayer/clashofcode' target='_blank' title='https://www.codingame.com/multiplayer/clashofcode'>Coding Games and Programming Challenges to Code Better</a></li>
+          <li><a href='https://leetcode.com/problemset/all/?difficulty=EASY&page=1&status=NOT_STARTED' target='_blank' title='https://leetcode.com/problemset/all/?difficulty=EASY&page=1&status=NOT_STARTED'>Problems - LeetCode</a></li>
+          <li><a href='https://leetcode.com/problemset/all/?page=1&status=NOT_STARTED&difficulty=MEDIUM' target='_blank' title='https://leetcode.com/problemset/all/?page=1&status=NOT_STARTED&difficulty=MEDIUM'>Problems - LeetCode</a></li>
+          <li><a href='https://onlinecompiler.app/online-compiler/ruby-programming' target='_blank' title='https://onlinecompiler.app/online-compiler/ruby-programming'>Ruby Online Compiler - Write, Compile, and Run Ruby Code Instantly</a></li>
+          <li><a href='https://onecompiler.com/ruby' target='_blank' title='https://onecompiler.com/ruby'>Ruby Online Compiler & Interpreter</a></li>
+          <li><a href='https://ato.pxeger.com/run?1=m72kqDSpcsGCpaUlaboWaBSUBgA' target='_blank' title='https://ato.pxeger.com/run?1=m72kqDSpcsGCpaUlaboWaBSUBgA'>Ruby  Attempt This Online</a></li>
+          <li><a href='https://www.onlinegdb.com/online_ruby_interpreter' target='_blank' title='https://www.onlinegdb.com/online_ruby_interpreter'>Online Ruby Interpreter - online editor</a></li>
+          <li><a href='https://paiza.io/projects/CdDU8UpqrrwAp4LbF1v4EQ?language=ruby' target='_blank' title='https://paiza.io/projects/CdDU8UpqrrwAp4LbF1v4EQ?language=ruby'>(Ruby) | Online editor and compiler</a></li>
+          <li><a href='https://www.codewars.com/dashboard' target='_blank' title='https://www.codewars.com/dashboard'>Home | Codewars</a></li>
+          <li><a href='https://www.regular-expressions.info/lookaround.html' target='_blank' title='https://www.regular-expressions.info/lookaround.html'>Regex Tutorial - Lookahead and Lookbehind Zero-Length Assertions</a></li>
+          <li><a href='http://learnyouahaskell.com/chapters' target='_blank' title='http://learnyouahaskell.com/chapters'>Chapters - Learn You a Haskell for Great Good!</a></li>
+          <li><a href='https://www.reddit.com/r/learnprogramming/comments/c37o7k/a_list_of_all_problem_solving_websites/' target='_blank' title='https://www.reddit.com/r/learnprogramming/comments/c37o7k/a_list_of_all_problem_solving_websites/'>A list of all problem solving websites. : learnprogramming</a></li>
+          <li><a href='https://www.cheat-sheets.org/saved-copy/bash-history-cheat-sheet.pdf' target='_blank' title='https://www.cheat-sheets.org/saved-copy/bash-history-cheat-sheet.pdf'>Bash History Cheat Sheet</a></li>
+          <li><a href='https://www.codingame.com/contribute/community?mode=accepted' target='_blank' title='https://www.codingame.com/contribute/community?mode=accepted'>Community</a></li>
+          <li><a href='https://codingame.tools/' target='_blank' title='https://codingame.tools/'>CodinGame Clash search</a></li>
+          <li><a href='https://vscode.dev/' target='_blank' title='https://vscode.dev/'>Walkthrough: Setup VS Code Web - Workspace - Visual Studio Code</a></li>
+          <li><a href='https://github.com/AndyObtiva/glimmer-dsl-libui?tab=readme-ov-file' target='_blank' title='https://github.com/AndyObtiva/glimmer-dsl-libui?tab=readme-ov-file'>GitHub - AndyObtiva/glimmer-dsl-libui: Glimmer DSL for LibUI - Prerequisite-Free Ruby Desktop Development Cross-Platform Native GUI Library - The Quickest Way From Zero To GUI - If You Liked Shoes, Yo</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Exercise</h2>
+        <ul>
+          <li><a href='https://darebee.com/daily.html' target='_blank' title='https://darebee.com/daily.html'>Exercise of the Day</a></li>
+          <li><a href='https://runkeeper.com/user/Kikifax/activity/1960862489?activityList=true&' target='_blank' title='https://runkeeper.com/user/Kikifax/activity/1960862489?activityList=true&'>Running Activity 0.01 km - Runkeeper</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Games</h2>
+        <ul>
+          <li><a href='https://lichess.org/' target='_blank' title='https://lichess.org/'>lichess.org  Free Online Chess</a></li>
+          <li><a href='https://regexcrossword.com/' target='_blank' title='https://regexcrossword.com/'>Regex Crossword</a></li>
+          <li><a href='https://gameofbombs.com/landing#/' target='_blank' title='https://gameofbombs.com/landing#/'>Game Of Bombs</a></li>
+          <li><a href='https://hsreplay.net/decks/' target='_blank' title='https://hsreplay.net/decks/'>Hearthstone Decks - HSReplay.net</a></li>
+          <li><a href='https://www.hearthstonetopdecks.com/guides/hearthstone-battlegrounds-heroes-tier-list-guides/' target='_blank' title='https://www.hearthstonetopdecks.com/guides/hearthstone-battlegrounds-heroes-tier-list-guides/'>Hearthstone Battlegrounds Heroes Tier List & Guide - Best Available Heroes & Strategies - June 2023 - Hearthstone Top Decks</a></li>
+          <li><a href='https://nsv-online.de/ligen/bezirk2/' target='_blank' title='https://nsv-online.de/ligen/bezirk2/'>Bezirk Braunschweig 2024/25</a></li>
+          <li><a href='https://nsv-online.de/ligen/bezirk2-2526/' target='_blank' title='https://nsv-online.de/ligen/bezirk2-2526/'>Bezirk Braunschweig 2025/26</a></li>
+          <li><a href='https://www.schachbezirk-braunschweig.de/' target='_blank' title='https://www.schachbezirk-braunschweig.de/'>schachbezirk-braunschweig.de</a></li>
+          <li><a href='https://www.sv-koenigsspringer.de/' target='_blank' title='https://www.sv-koenigsspringer.de/'>Schachverein Knigsspringer Braunschweig</a></li>
+          <li><a href='https://schach.in/sv-koenigsspringer-braunschweig/' target='_blank' title='https://schach.in/sv-koenigsspringer-braunschweig/'>SV Knigsspringer Braunschweig (Schach in Deutschland)</a></li>
+          <li><a href='https://nsv-online.de/alle-ligen/' target='_blank' title='https://nsv-online.de/alle-ligen/'>Ligen bersicht  NSV</a></li>
+          <li><a href='https://nsv-online.de/ligen/bezirk2-2526/bezirksliga/' target='_blank' title='https://nsv-online.de/ligen/bezirk2-2526/bezirksliga/'>Bezirk Braunschweig 2025/26</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Languages</h2>
+        <ul>
+          <li><a href='https://www.fluentu.com/blog/bilingual-parallel-texts/' target='_blank' title='https://www.fluentu.com/blog/bilingual-parallel-texts/'>5 Spots to Pick Up Texts in the Bilingual Parallel Universe | FluentU Language Learning</a></li>
+          <li><a href='https://lyricstranslate.com/en/collection/luis-fonsi-vida' target='_blank' title='https://lyricstranslate.com/en/collection/luis-fonsi-vida'>Luis Fonsi - VIDA - Collection</a></li>
+          <li><a href='https://bilinguator.com/en/' target='_blank' title='https://bilinguator.com/en/'>Bilinguator  online library of bilingual books</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Learning</h2>
+        <ul>
+          <li><a href='https://www.coursera.org/learn/html-css-javascript-for-web-developers/home/week/1' target='_blank' title='https://www.coursera.org/learn/html-css-javascript-for-web-developers/home/week/1'>HTML, CSS, and Javascript for Web Developers - Startseite | Coursera</a></li>
+          <li><a href='https://www.lesswrong.com/posts/xg3hXCYQPJkwHyik2/the-best-textbooks-on-every-subject' target='_blank' title='https://www.lesswrong.com/posts/xg3hXCYQPJkwHyik2/the-best-textbooks-on-every-subject'>The Best Textbooks on Every Subject - LessWrong</a></li>
+          <li><a href='https://regexlearn.com/learn/regex101' target='_blank' title='https://regexlearn.com/learn/regex101'>Regex 101 - EN</a></li>
+          <li><a href='https://www.brainscape.com/' target='_blank' title='https://www.brainscape.com/'>Brainscape: The Best Flashcards App | Make Flashcards Online</a></li>
+          <li><a href='https://tatoeba.org/en/stats/sentences_by_language' target='_blank' title='https://tatoeba.org/en/stats/sentences_by_language'>Number of sentences per language - Tatoeba</a></li>
+          <li><a href='https://www.shellscript.sh/index.html' target='_blank' title='https://www.shellscript.sh/index.html'>The Shell Scripting Tutorial</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Media</h2>
+        <ul>
+          <li><a href='https://www.twitch.tv/directory/following/games' target='_blank' title='https://www.twitch.tv/directory/following/games'>Categories You Follow - Twitch</a></li>
+          <li><a href='https://www.fotor.com/features/ai-image-generator/' target='_blank' title='https://www.fotor.com/features/ai-image-generator/'>AI Image Generator: Text to Image in Seconds for Free | Fotor</a></li>
+          <li><a href='https://creator.nightcafe.studio/my-creations' target='_blank' title='https://creator.nightcafe.studio/my-creations'>My Creations - NightCafe Creator</a></li>
+          <li><a href='https://slavart.gamesdrive.net/' target='_blank' title='https://slavart.gamesdrive.net/'>Slav Art | Download HQ Music For Free</a></li>
+          <li><a href='https://www.looptube.xyz/' target='_blank' title='https://www.looptube.xyz/'>Loop YouTube - repeat & slow down video segments with LoopTube</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Personal, banking etc.</h2>
+        <ul>
+          <li><a href='https://kunde.comdirect.de/lp/wt/login?execution=e1s1&afterTimeout=true' target='_blank' title='https://kunde.comdirect.de/lp/wt/login?execution=e1s1&afterTimeout=true'>comdirect Login - Ihr Online Banking & Brokerage | comdirect.de</a></li>
+          <li><a href='https://www.harzsparkasse.de/de/home.html' target='_blank' title='https://www.harzsparkasse.de/de/home.html'>Internet-Filiale - Harzsparkasse</a></li>
+          <li><a href='https://direct.fidelity.de/secure/login' target='_blank' title='https://direct.fidelity.de/secure/login'>Fidelity Direktanleger | Secure</a></li>
+          <li><a href='https://login.blockchain.com/#/login' target='_blank' title='https://login.blockchain.com/#/login'>Blockchain.com | Login</a></li>
+          <li><a href='https://mail.google.com/mail/u/0/#inbox' target='_blank' title='https://mail.google.com/mail/u/0/#inbox'>Gmail</a></li>
+          <li><a href='https://kwkollegen-northeim.portal-bereich.de/html/#mypaymentdocuments' target='_blank' title='https://kwkollegen-northeim.portal-bereich.de/html/#mypaymentdocuments'>Meine Lohndokumente | ADDISON OneClick</a></li>
+          <li><a href='https://www.onenote.com/notebooks?session=44c9430f-ff74-49ba-ab95-622437cd83ca&auth=1&nf=1&fromAR=1' target='_blank' title='https://www.onenote.com/notebooks?session=44c9430f-ff74-49ba-ab95-622437cd83ca&auth=1&nf=1&fromAR=1'>Notebooks</a></li>
+          <li><a href='http://www.sv-koenigsspringer.de/' target='_blank' title='http://www.sv-koenigsspringer.de/'>Schachverein Knigsspringer Braunschweig</a></li>
+          <li><a href='https://www.britishairways.com/travel/managebooking/public/de_de' target='_blank' title='https://www.britishairways.com/travel/managebooking/public/de_de'>British Airways - Manage My Booking</a></li>
+          <li><a href='https://www.expedia.de/trips/egti-BTM-9V6-H2LV' target='_blank' title='https://www.expedia.de/trips/egti-BTM-9V6-H2LV'>El Paso</a></li>
+          <li><a href='https://www.messenger.com/e2ee/t/7997854206911549/' target='_blank' title='https://www.messenger.com/e2ee/t/7997854206911549/'>Messenger</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Process</h2>
+        <ul>
+          <li><a href='https://buch7.de/produkt/eine-kurze-geschichte-der-menschheit-yuval-noah-harari/1037962477?ean=9783421048554&partner=green-rabbit' target='_blank' title='https://buch7.de/produkt/eine-kurze-geschichte-der-menschheit-yuval-noah-harari/1037962477?ean=9783421048554&partner=green-rabbit'>Eine kurze Geschichte der Menschheit  Yuval Noah Harari, Jrgen Neubauer | buch7  Der soziale Buchhandel</a></li>
+          <li><a href='https://neetcode.io/practice' target='_blank' title='https://neetcode.io/practice'>Practice</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Random saves</h2>
+        <ul>
+          <li><a href='http://bewusst-vegan-froh.de/10-kraeuter-die-du-ganzjaehrig-im-wasser-wachsen-lassen-kannst/' target='_blank' title='http://bewusst-vegan-froh.de/10-kraeuter-die-du-ganzjaehrig-im-wasser-wachsen-lassen-kannst/'>10 Kruter, die du im Wasser aufziehen kannst und die ein ganzes Jahr lang im Haus blhen -    Bewusst-Vegan-Froh</a></li>
+          <li><a href='https://www.brainscape.com/' target='_blank' title='https://www.brainscape.com/'>Brainscape: The Best Flashcards App | Make Flashcards Online</a></li>
+          <li><a href='https://www.asos.com/search/?q=hoodie&currentpricerange=5-380&sort=priceasc&refine=base_colour:4|currentprice:5%3C20|floor:1001' target='_blank' title='https://www.asos.com/search/?q=hoodie&currentpricerange=5-380&sort=priceasc&refine=base_colour:4|currentprice:5%3C20|floor:1001'>Search: hoodie - page 1 of 47 | ASOS</a></li>
+          <li><a href='https://www.google.com/search?q=prospect+-inurl%3A(htm%7Chtml%7Cphp%7Cpls%7Ctxt)+intitle%3Aindex.of+%E2%80%9Clast+modified%E2%80%9D+(mp4%7Cwma%7Caac%7Cavi)&oq=prospect+-inurl%3A(htm%7Chtml%7Cphp%7Cpls%7Ctxt)+intitle%3Aindex.of+%E2%80%9Clast+modified%E2%80%9D+(mp4%7Cwma%7Caac%7Cavi)&aqs=chrome..69i57.4535j0j4&sourceid=chrome&ie=UTF-8' target='_blank' title='https://www.google.com/search?q=prospect+-inurl%3A(htm%7Chtml%7Cphp%7Cpls%7Ctxt)+intitle%3Aindex.of+%E2%80%9Clast+modified%E2%80%9D+(mp4%7Cwma%7Caac%7Cavi)&oq=prospect+-inurl%3A(htm%7Chtml%7Cphp%7Cpls%7Ctxt)+intitle%3Aindex.of+%E2%80%9Clast+modified%E2%80%9D+(mp4%7Cwma%7Caac%7Cavi)&aqs=chrome..69i57.4535j0j4&sourceid=chrome&ie=UTF-8'>prospect -inurl:(htm|html|php|pls|txt) intitle:index.of last modified (mp4|wma|aac|avi) - Google Search</a></li>
+          <li><a href='https://annas-archive.org/' target='_blank' title='https://annas-archive.org/'>Annas Archive</a></li>
+          <li><a href='https://www.mydealz.de/gruppe/gaming-pc?temperatureFrom=500' target='_blank' title='https://www.mydealz.de/gruppe/gaming-pc?temperatureFrom=500'>Gaming PC gnstig kaufen  Beste Angebote & Preise - mydealz.de</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Software, warez</h2>
+        <ul>
+          <li><a href='https://ibooks.to/' target='_blank' title='https://ibooks.to/'>Ebook kostenlos und gratis Download als epub, pdf, azw3 und mobi</a></li>
+          <li><a href='https://www.reddit.com/r/Piracy/wiki/megathread/movies_and_tv/#wiki_.25BA_ddl_.28direct_download.29' target='_blank' title='https://www.reddit.com/r/Piracy/wiki/megathread/movies_and_tv/#wiki_.25BA_ddl_.28direct_download.29'>megathread/movies_and_tv - Piracy</a></li>
+          <li><a href='https://filepursuit.com/' target='_blank' title='https://filepursuit.com/'>FilePursuit- Discover Everything!, Search the web for files, videos, audios, eBooks and much more.</a></li>
+          <li><a href='https://sanet.st/full/' target='_blank' title='https://sanet.st/full/'>SoftArchive  Unlimited Download Source</a></li>
+          <li><a href='https://de.downmagaz.net/' target='_blank' title='https://de.downmagaz.net/'>Download PDF magazines - Deutsch Magazines Commumity!</a></li>
+          <li><a href='https://ripped.guide/' target='_blank' title='https://ripped.guide/'>Home - Ripped</a></li>
+          <li><a href='https://dl1.3rver.org/hex1/' target='_blank' title='https://dl1.3rver.org/hex1/'>Index of /hex1/</a></li>
+          <li><a href='https://hacksnation.com/' target='_blank' title='https://hacksnation.com/'>HacksNation - A Place Where Everyone Can Learn</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Watch</h2>
+        <ul>
+          <li><a href='https://lookmovie2.to/' target='_blank' title='https://lookmovie2.to/'>Watch Latest Movies & Shows Episode Online Free</a></li>
+          <li><a href='https://seriestv.org/' target='_blank' title='https://seriestv.org/'>Watchseries | Watch New Free TV Series & HD Movies Online | Watch TV Shows 2022</a></li>
+          <li><a href='https://sflix.to/' target='_blank' title='https://sflix.to/'>SFlix | Watch HD Movies Online Free | TV Series & Stream Live</a></li>
+          <li><a href='https://myflixer.to/' target='_blank' title='https://myflixer.to/'>MyFlixer - Watch movies and Series online free in Full HD on MyFlixer</a></li>
+          <li><a href='https://dopebox.to/home' target='_blank' title='https://dopebox.to/home'>Watch TV Online Streaming | Watch Free Movies Online</a></li>
+        </ul>
+      </div>
+      <div class='category'>
+        <h2>Zzz</h2>
+        <ul>
+          <li><a href='https://www.iamexpat.de/expat-info/driving-germany/road-signs' target='_blank' title='https://www.iamexpat.de/expat-info/driving-germany/road-signs'>German road signs | Driving in Germany</a></li>
+          <li><a href='https://en.wikipedia.org/wiki/Road_signs_in_Germany' target='_blank' title='https://en.wikipedia.org/wiki/Road_signs_in_Germany'>Road signs in Germany - Wikipedia</a></li>
+          <li><a href='https://en.wikipedia.org/wiki/Road_signs_in_Germany' target='_blank' title='https://en.wikipedia.org/wiki/Road_signs_in_Germany'>Road signs in Germany - Wikipedia</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
