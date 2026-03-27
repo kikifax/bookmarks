@@ -11,7 +11,7 @@ require 'fileutils'
 require 'set'
 
 # --- Configuration ---
-VERSION = "1.1.#{Time.now.strftime("%Y%m%d%H%M%S")}"
+VERSION = "1.2.#{Time.now.strftime("%Y%m%d%H%M%S")}"
 INPUT_FILES = Dir.glob(File.join(File.dirname(__FILE__), '*.md'))
 OUTPUT_FILE = 'bookmarks.html'
 FAVICON_CACHE_FILE = 'favicon_cache.json'
@@ -168,12 +168,29 @@ def parse_bookmarks_tsv(content)
   bookmarks = []
   cleaned_content = content.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
   cleaned_content.each_line do |line|
-    next if line.strip.empty? || line.strip.downcase.start_with?('title')
-    parts = line.strip.split("\t", 4)
+    line = line.strip
+    next if line.empty? || line.downcase.start_with?('title')
+    
+    parts = line.split("\t")
+    title = nil
+    url = nil
+    
     if parts.length >= 2
       title = parts[0].strip
       url = parts[1].strip
-      bookmarks << {title: title, url: url} if URI.regexp(['http', 'https']).match?(url)
+    elsif parts.length == 1
+      entry = parts[0].strip
+      if entry =~ /^https?:\/\//
+        url = entry
+        title = entry.sub(/^https?:\/\//, '').sub(/\/$/, '')
+      elsif entry =~ /^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(:[0-9]{1,5})?(\/.*)?$/i
+        url = "https://#{entry}"
+        title = entry
+      end
+    end
+    
+    if url && URI.regexp(['http', 'https']).match?(url)
+      bookmarks << {title: title || url, url: url}
     end
   end
   bookmarks

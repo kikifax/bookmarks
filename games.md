@@ -10,3 +10,5 @@ Schachverein Königsspringer Braunschweig	https://www.sv-koenigsspringer.de/	202
 SV Königsspringer Braunschweig (Schach in Deutschland)	https://schach.in/sv-koenigsspringer-braunschweig/	2025-11-25 01:23	
 Ligen Übersicht – NSV	https://nsv-online.de/alle-ligen/	2025-11-25 01:23	
 Bezirk Braunschweig 2025/26	https://nsv-online.de/ligen/bezirk2-2526/bezirksliga/	2025-11-25 01:23	
+GemCraft - Play on Armor Games		2025-12-16 19:30	
+Google Gemini	https://gemini.google.com/app/e10438ede72da212	2026-03-26 23:00	Fortnite
