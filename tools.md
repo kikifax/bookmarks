@@ -10,3 +10,4 @@ FAQ - TechBench by WZT (v4.1.1)	https://tb.rg-adguard.net/faq.php?lang=en-US	202
 LibreTranslate/LibreTranslate: Free and Open Source Machine Translation API. 100% self-hosted, offline capable and easy to setup.	https://github.com/LibreTranslate/LibreTranslate	2025-11-25 01:23	
 Online Character Count Tool	https://www.charactercountonline.com/	2025-11-25 01:23	
 booky	https://booky.io/	2025-11-25 16:08	
+Rentry.co - Markdown Paste Service	https://rentry.co/	2026-05-26 16:00	

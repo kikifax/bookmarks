@@ -16,3 +16,5 @@ NoteGPT - AI Summarizer and Generator for Enhanced Learning	https://notegpt.io/	
 Sidekick™ | Sidekick™	https://sidekick.tobit.com/#/new	2025-11-25 01:23	
 AI Chat	https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1	2025-11-25 01:23	
 Chatbot Arena (formerly LMSYS): Free AI Chat to Compare & Test Best AI Chatbots	https://lmarena.ai/	2025-11-25 01:23	
+
+https://g.co/gemini/share/6aff2e102770

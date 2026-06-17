@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
           let lazyImage = entry.target;
           lazyImage.src = lazyImage.dataset.src;
           lazyImage.removeAttribute("data-src");
-          lazyImage.addEventListener('load', debouncedLayout);
           lazyImageObserver.unobserve(lazyImage);
         }
       });
