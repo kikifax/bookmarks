@@ -243,16 +243,24 @@ def get_and_process_favicon(page_url)
   # Step 2: Fetch and process the favicon
   begin
     image_data = URI.open(best_favicon_url, 'rb', read_timeout: 3, open_timeout: 3).read
-    return nil if image_data.bytesize > MAX_FAVICON_SIZE_BYTES
-    
-    ext = File.extname(URI.parse(best_favicon_url).path).delete('.').downcase
-    mime_type = {
-      'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
-      'gif' => 'image/gif', 'svg' => 'image/svg+xml', 'ico' => 'image/x-icon'
-    }[ext] || 'application/octet-stream'
-    
-    return "data:#{mime_type};base64,#{Base64.strict_encode64(image_data)}"
+    if image_data.bytesize <= MAX_FAVICON_SIZE_BYTES
+      ext = File.extname(URI.parse(best_favicon_url).path).delete('.').downcase
+      mime_type = {
+        'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+        'gif' => 'image/gif', 'svg' => 'image/svg+xml', 'ico' => 'image/x-icon'
+      }[ext] || 'application/octet-stream'
+      
+      return "data:#{mime_type};base64,#{Base64.strict_encode64(image_data)}"
+    end
   rescue StandardError; end
+  
+  # Step 3: Fallback to Google's Favicon Service (returns generic globe if nothing found)
+  begin
+    google_url = "https://www.google.com/s2/favicons?domain=#{page_uri.host}&sz=64"
+    image_data = URI.open(google_url, 'rb', read_timeout: 3, open_timeout: 3).read
+    return "data:image/png;base64,#{Base64.strict_encode64(image_data)}"
+  rescue StandardError; end
+  
   nil
 end
 
