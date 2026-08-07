@@ -1,6 +1,7 @@
 dresalii Main Hub	http://dresalii.spdns.de:4567/main	2025-12-01 11:33	
 comdirect Login - Ihr Online Banking & Brokerage | comdirect.de	https://kunde.comdirect.de/lp/wt/login	2025-11-25 01:23	
 Internet-Filiale - Harzsparkasse	https://www.harzsparkasse.de/de/home.html	2025-11-25 01:23	
+Trade Republic https://app.traderepublic.com/
 Gmail	https://mail.google.com/mail/u/0/#inbox	2025-11-25 01:23	
 Meine Lohndokumente | ADDISON OneClick	https://kwkollegen-northeim.portal-bereich.de/html/#mypaymentdocuments	2025-11-25 01:23	
 Fidelity Direktanleger | Secure	https://direct.fidelity.de/secure/login	2025-11-25 01:23	
