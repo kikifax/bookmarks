@@ -188,6 +188,13 @@ def parse_bookmarks_tsv(content)
       end
     end
     
+    # Fallback for space-separated instead of tab-separated lines
+    if url.nil? && parts.length == 1 && parts[0] =~ /(https?:\/\/\S+)/
+      url = $1
+      title = parts[0].sub(url, '').strip
+      title = url if title.empty?
+    end
+    
     if url && URI.regexp(['http', 'https']).match?(url)
       bookmarks << {title: title || url, url: url}
     end
