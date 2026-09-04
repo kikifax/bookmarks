@@ -11,7 +11,7 @@ require 'fileutils'
 require 'set'
 
 # --- Configuration ---
-VERSION = "1.2.#{Time.now.strftime("%Y%m%d%H%M%S")}"
+VERSION = "1.3.#{Time.now.strftime("%Y%m%d%H%M%S")}"
 INPUT_FILES = Dir.glob(File.join(File.dirname(__FILE__), '*.md'))
 OUTPUT_FILE = 'bookmarks.html'
 FAVICON_CACHE_FILE = 'favicon_cache.json'
@@ -283,19 +283,29 @@ end
 def generate_html_if_new(files)
   puts "Bookmarks Generator (v#{VERSION})"
   
-  # First, check for new URLs
+  # Check if bookmarks.html exists and compare mtime
+  output_exists = File.exist?(OUTPUT_FILE)
+  output_mtime = output_exists ? File.mtime(OUTPUT_FILE) : Time.at(0)
+  files_newer = files.any? { |f| File.mtime(f) > output_mtime }
+
+  # Check for URL list changes
   all_bookmarks = files.flat_map { |md_file| parse_bookmarks_tsv(File.read(md_file, encoding: 'UTF-8')) }
   current_urls = Set.new(all_bookmarks.map { |bm| bm[:url] })
   known_urls = load_known_urls
-  
-  new_urls_found = (current_urls != known_urls)
+  urls_changed = (current_urls != known_urls)
 
-  unless new_urls_found
-    puts "No new bookmark URLs found. Exiting."
+  should_regenerate = !output_exists || files_newer || urls_changed
+
+  unless should_regenerate
+    puts "No file modifications or URL changes detected. Exiting."
     return false
   end
 
-  puts "New URLs detected. Proceeding with regeneration..."
+  reason = []
+  reason << "missing output file" unless output_exists
+  reason << "modified markdown notes" if files_newer
+  reason << "URL changes" if urls_changed
+  puts "Regeneration triggered due to: #{reason.join(', ')}..."
   favicon_cache = load_favicon_cache
   puts "Loaded #{favicon_cache.size} favicons from cache."
   
