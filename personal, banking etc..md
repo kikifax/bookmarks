@@ -1,4 +1,4 @@
-dresalii Main Hub	http://dresalii.spdns.de:4567/main	2025-12-01 11:33	
+dresalii Main Hub	https://dresalii.spdns.de/main	2025-12-01 11:33	
 comdirect Login - Ihr Online Banking & Brokerage | comdirect.de	https://kunde.comdirect.de/lp/wt/login	2025-11-25 01:23	
 Internet-Filiale - Harzsparkasse	https://www.harzsparkasse.de/de/home.html	2025-11-25 01:23	
 Trade Republic https://app.traderepublic.com/
