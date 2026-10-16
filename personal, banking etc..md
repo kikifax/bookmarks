@@ -11,3 +11,4 @@ Schachverein Königsspringer Braunschweig	http://www.sv-koenigsspringer.de/	2025
 Messenger	https://www.messenger.com/e2ee/t/7997854206911549/	2025-11-25 01:23	
 Chrome Remote Desktop - Fozzie	http://192.168.178.1/	2025-12-16 18:32	
 Your billing accounts – Account Profile – Billing – Google Cloud console	https://console.cloud.google.com/billing	2026-10-10 14:42	
+Xiaomi MiMo API Open Platform	https://platform.xiaomimimo.com/console/plan-manage	2026-10-15 22:10	
